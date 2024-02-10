@@ -11,10 +11,10 @@ function App() {
     <BrowserRouter>
         <ToastContainer position='top-center'/>
         <Routes>    
-            <Route path="/*" element={<BusRoute/>}/>
+            <Route path="/*" element={<ClientRoute/>}/>
+            <Route path="/bus*" element={<BusRoute/>}/>
             <Route path="/admin/*" element={<AdminRoute/>}/>
             <Route path="/controller/*" element={<ControllerRoute/>}/>
-            <Route path="/client/*" element={<ClientRoute/>}/>
         </Routes>  
     </BrowserRouter>
   );
