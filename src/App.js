@@ -1,24 +1,22 @@
-import logo from './logo.svg';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-bootstrap';
+import BusRoute from './routes/BusRoute'
+import AdminRoute from './routes/AdminRoute'
+import ControllerRoute from './routes/ControllerRoute'
+import ClientRoute from './routes/ClientRoute'
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+        <ToastContainer position='top-center'/>
+        <Routes>    
+            <Route path="/*" element={<BusRoute/>}/>
+            <Route path="/admin/*" element={<AdminRoute/>}/>
+            <Route path="/controller/*" element={<ControllerRoute/>}/>
+            <Route path="/client/*" element={<ClientRoute/>}/>
+        </Routes>  
+    </BrowserRouter>
   );
 }
 
