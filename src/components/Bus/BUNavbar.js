@@ -4,6 +4,7 @@ import { FaHome } from 'react-icons/fa';
 import { IoSettingsSharp } from "react-icons/io5";
 import { IoLogOut } from "react-icons/io5";
 import "../../assets/controller/styleController.css";
+import { Utils } from "../../_utils/Utils";
 
 const BUNavbar = () => {
 
@@ -11,7 +12,7 @@ const BUNavbar = () => {
   const location = useLocation()
   
   useEffect(() => {
-      // Utils.verifyToken()
+      Utils.verifyToken()
       if(location.pathname === '/'){
           setActiveTab('accueil')
       }else if (location.pathname === '/listebus'){
@@ -32,7 +33,7 @@ const BUNavbar = () => {
               <div className={`${activeTab === "listeArret" ? "icon-link" : "active-link"}`}><i><IoSettingsSharp  /></i></div>
           </Link>
           <Link to='/login' target="_blank">
-              <div className="active-link"><i><IoLogOut /></i></div>
+              <div className="active-link" onClick={Utils.Logout}><i><IoLogOut /></i></div>
           </Link>
       </div>
     </div>

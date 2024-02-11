@@ -15,7 +15,6 @@ const ClientBus = () => {
     const [bus, setBus] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
-
     const openModal = () => {
       setShowModal(true);
     };

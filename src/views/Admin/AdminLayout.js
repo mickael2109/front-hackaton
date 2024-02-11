@@ -2,17 +2,17 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import ASidebar from '../../components/Admin/ASidebar'
 import ANavbar from '../../components/Admin/ANavbar'
-import '../../assets/admin/styleAdmin.css'
+import '../../assets/Admin/styleAdmin.css'
 
 
 const AdminLayout = () => {
     return (
-        <div className='adminPage'>
+        <div className='admin' >
             <div className='sidebar_admin' id='sidebarFront'>
                 <ASidebar/>
             </div>
             <div className='contentPageAdmin'>
-                <div className='navbar_admin'>
+                <div className='navbar-bus'>
                     <ANavbar/>
                 </div>
                 <div className='borderContenuAdmin'>

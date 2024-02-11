@@ -26,7 +26,7 @@ let PageNotFound = () =>{
 // Logout
 let Logout = () => {
     localStorage.removeItem('token');
-    window.location.href = '/login'; 
+    window.location.href = '/'; 
 };
 
 // Verify token

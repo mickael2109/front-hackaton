@@ -35,6 +35,7 @@ const ClientArret = () => {
                         <form className='search form-inline my-2 my-lg-0'>
                             <input className='input' type='search' placeholder='Arrêt de départ' aria-label='Rechercher' />
                             <input className='input' type='search' placeholder="Arrêt d'arrivé" aria-label='Rechercher' />
+                            <button type='submit' className='button'>Valider</button>
                         </form>
                     </div>
                     <div className='map-tana'>

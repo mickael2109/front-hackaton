@@ -27,7 +27,7 @@ const Login = () => {
               }else if(res.data.role === 2){
                 window.location.href='/controller'
               }else if(res.data.role === 3){
-                window.location.href='/receveur'
+                window.location.href='/bus'
               }        
         })
         .catch((error) => {
