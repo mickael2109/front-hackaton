@@ -56,7 +56,7 @@ const ClientBus = () => {
             <div className='arret-content'>
                 <div className='text-arret-content'>
                     <div className='titre-gare'>
-                        <span>Train Urbain d'Antananarivo</span>
+                        <span>Bus Urbain d'Antananarivo</span>
                         <p className='txt'>Accusantium quam, aliquam ultricies eget tempor id, aliquam eget nibh et. 
                             Maecen aliquam, risus at semper. Proin iaculis purus consequat sem cure digni ssim. Donec porttitora entum. 
                         </p>
@@ -139,6 +139,7 @@ const ModalBus = ({ showModal, closeModal, idB }) => {
 
     useEffect(() => {
         setIdbus(idB);
+        console.log("dataBus dataBus :",dataBus)
         if (showModal) {
             getBusId(idB);
         }

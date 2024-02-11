@@ -6,7 +6,7 @@ import { useMap } from 'react-leaflet';
 
 const MapBus = ({ dataBus }) => {
     const map = useMap();
-    
+    console.log("dataBus : ",dataBus)
     useEffect(() => {
         // Efface tous les marqueurs de la carte
         map.eachLayer(layer => {
@@ -18,6 +18,7 @@ const MapBus = ({ dataBus }) => {
         // Ajoute les nouveaux marqueurs pour les emplacements filtrés
         if (dataBus.length > 0) {
             dataBus.forEach(location => {
+                console.log("location : ",location)
                 const marker = L.marker([location.lat, location.long]).addTo(map);
                 marker.bindPopup(location.nomArret + ' (' + location.nbpa + ')'); // Affiche le nom du lieu dans la popup
             });
@@ -36,8 +37,8 @@ const MapBus = ({ dataBus }) => {
                 show: false // Vous pouvez changer ceci en true si vous souhaitez afficher le panneau de contrôle de routage par défaut
             }).addTo(map);
 
-            // // Affiche le chemin sur la carte
-            // control.route();
+            // Affiche le chemin sur la carte
+            control.route();
         }
     }, [dataBus, map]); 
 
