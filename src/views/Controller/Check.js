@@ -3,18 +3,18 @@ import axios from 'axios';
 import { Utils } from '../../_utils/Utils';
 
 const Check = () => {
-    const addPersonne = async (e) => {
+    const createCompte = async (e) => {
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/arret/addPersonne',
-                {
-                    "arretId": 1,
-                    "typeBusId": 1
-                }, {
+            {
+                "arretId": 1,
+                "typeBusId": 1
+            }, {
                 headers: { "Content-Type": "multipart/form-data" }
             }).then(res => {
-                Utils.success("Votre compte est bien enregistré !");
-                window.location.href = '/';
+                Utils.sucess("Votre compte est bien enregistré !");
+                window.location.href = '/controller';
             })
                 .catch((error) => {
                     Utils.errorPage(error.response.data.message);
