@@ -22,6 +22,7 @@
     flex-direction: column;
     background-color: #035c8f;
     border-radius: 12px;
+    position: fixed;
   }
 
 
@@ -72,7 +73,7 @@
   width: 70%;
   overflow: hidden;
   overflow-y: scroll;
-  height: 85vh;
+  height: 55vh;
 }
   .list-arret-bus a{
       width: 300px;
@@ -120,3 +121,147 @@
           font-weight: 600;
           font-size: 20px;
       }
+
+
+/*======= Media queries (max-width: 1100px) =======*/
+@media (max-width: 1100px) {
+  .liste-arret .image-bus{
+    width: 200px;
+  }
+    .image-bus p {
+      font-size: 16px;
+    }
+    /*  */
+  .list-arret-bus a{
+    width: 250px;
+    height: 150px;
+  }
+  .list-arret-bus .card-item{
+      width: 250px;
+      height: 150px;
+  }
+      .list-arret-bus .card-item .card-image img{
+          width: 250px;
+          height: 150px;
+      }
+
+  .list-arret-bus .card-item .card-body{
+      margin-top: 0px;
+      width: 250px;
+      height: 0px;
+  }
+    
+      .card-body .card-title{
+          margin-top: -150px;
+      }
+
+      
+      .list-arret-bus .card-item .card-body .card-title h4{
+          font-size: 16px;
+      }
+}
+
+/*======= Media queries (max-width: 900px) =======*/
+@media (max-width: 900px) {
+  .liste-arret{
+    flex-direction: column;
+  }
+  .liste-arret .image-bus{
+    width: 200px;
+  }
+    .image-bus img{
+      height: 150px;
+    }
+    .image-bus p {
+      font-size: 16px;
+    }
+    /*  */
+  .list-arret-bus {
+    width: 100%;
+  }
+  .list-arret-bus a{
+    width: 250px;
+    height: 150px;
+  }
+  .list-arret-bus .card-item{
+      width: 250px;
+      height: 150px;
+  }
+      .list-arret-bus .card-item .card-image img{
+          width: 250px;
+          height: 150px;
+      }
+
+  .list-arret-bus .card-item .card-body{
+      margin-top: 0px;
+      width: 250px;
+      height: 0px;
+  }
+    
+      .card-body .card-title{
+          margin-top: -150px;
+      }
+
+      
+      .list-arret-bus .card-item .card-body .card-title h4{
+          font-size: 16px;
+      }
+}
+
+
+/*======= Media queries (max-width: 350px) =======*/
+@media (max-width: 350px) {
+  .sidebar{
+    width: 60px;
+  }
+
+  .icon-navbar .icon-link{
+    background-color: #0074b7bb;
+    padding: 8px 10px 8px 10px;
+    border-radius: 8px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+}
+
+    
+    /* ------  */
+  .liste-arret .image-bus{
+    width: 150px;
+  }
+    .image-bus img{
+      height: 100px;
+    }
+    .image-bus p {
+      font-size: 12px;
+    }
+    /* ---------- */
+  .list-arret-bus a{
+    width: 200px;
+    height: 100px;
+  }
+  .list-arret-bus .card-item{
+      width: 200px;
+      height: 100px;
+  }
+      .list-arret-bus .card-item .card-image img{
+          width: 200px;
+          height: 100px;
+      }
+
+  .list-arret-bus .card-item .card-body{
+      width: 200px;
+  }
+    
+      .card-body .card-title{
+          margin-top: -100px;
+      }
+
+      
+      .list-arret-bus .card-item .card-body .card-title h4{
+          font-size: 16px;
+      }
+}

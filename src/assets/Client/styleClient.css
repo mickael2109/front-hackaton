@@ -267,6 +267,221 @@
             font-size: 14px;
         }
 
+/*======= Media queries (max-width: 900px) =======*/
+@media (max-width: 900px) {
+    .icon-service i{
+        font-size: 20px;
+    }
+    .card-service .titre-service{
+        font-size: 16px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .card-service .text-service p{
+        font-size: 14px;
+    }
+
+    .accueil{
+        margin-top: 10px;
+    }
+
+        .accueil-text .titre{
+            font-size: 18px;
+        }
+            .accueil-text .sous-titre{
+                font-size: 22px;
+            } 
+            .accueil-text .txt{
+                font-size: 14px;
+            }
+        .accueil-image img{
+            width: 250px;
+            height: 250px;
+        }
+}  
+
+/*======= Media queries (max-width: 750px) =======*/
+@media (max-width: 750px) {
+    .accueil{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 50vh;
+    }
+    .accueil-text{
+        margin-top: 0px;
+    }
+    .accueil-image img{
+        width: 200px;
+        height: 200px;
+    }
+
+    .icon-service i{
+        font-size: 16px;
+    }
+    .card-service .titre-service{
+        font-size: 16px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .card-service .text-service p{
+        font-size: 14px;
+    }
+
+    /*  */
+    .service{
+        width: 100%;
+    }
+        .service .card-service{
+            width: 250px;
+            height: 180px;
+        }
+
+        .service .card-service:hover{
+            height: 190px;
+        }
+
+
+        .icon-service i{
+            font-size: 20px;
+        }
+
+    .card-service .titre-service{
+        font-size: 14px;
+    }
+
+    .card-service .text-service p{
+        font-size: 12px;
+    }
+}  
+
+
+/*======= Media queries (max-width: 650px) =======*/
+@media (max-width: 650px) {
+    .accueil{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 30vh;
+    }
+    
+    .accueil-text .sous-titre{
+        font-size: 14px;
+    }
+
+    .accueil-text .txt{
+        font-size: 10px;
+        margin-top: 10px;
+    }
+    .accueil-image img{
+        width: 150px;
+        height: 150px;
+        margin: 10px;
+    }
+    /*  */
+
+    .service{
+        height: 300px;
+    }
+        .service .card-service{
+            width: 150px;
+            height: 200px;
+        }
+
+        .service .card-service:hover{
+            height: 190px;
+        }
+            .card-service .titre-service{
+                font-size: 12px;
+            }
+
+            .card-service .text-service p{
+                font-size: 10px;
+            }
+}  
+
+
+
+/*======= Media queries (max-width: 492px) =======*/
+@media (max-width: 492px) {
+    .accueil .back-accueil img{
+        top: 0;
+        position: absolute;
+        width: 100%;
+        height: 120vh;
+        object-fit: cover;
+        z-index: 0;
+    }
+
+
+    .navbar-top{
+        position: fixed;
+    }
+        .navbar-element{
+            margin-top: 70px;
+        }
+
+    .accueil{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 50vh;
+        left: 0;
+    }
+    .accueil .accueil-text{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .accueil-text .sous-titre{
+        font-size: 14px;
+    }
+
+    .accueil-text .txt{
+        font-size: 10px;
+        margin-top: 10px;
+        width: 80%;
+        margin: 10px;
+        width: 80%;
+
+    }
+    .accueil-image img{
+        width: 150px;
+        height: 150px;
+        margin: 10px;
+    }
+    /*  */
+
+    .service{
+        height: 300px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+        .service .card-service{
+            width: 150px;
+            height: 200px;
+        }
+
+        .service .card-service:hover{
+            height: 190px;
+        }
+            .card-service .titre-service{
+                font-size: 12px;
+            }
+
+            .card-service .text-service p{
+                font-size: 10px;
+            }
+}  
+
+
+
+
+
 
 
 /* -------------------------------------------------------------------------- */
@@ -352,19 +567,4 @@
                     background-color: #0074b7bb;
                 }
 
-        .search-top{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            margin-left: 20px;
-        }
-
-    .titre-nav span{
-        font-size: 12px;
-        font-weight: bold;
-        color: #0074b773;
-        text-transform: uppercase;
-
-    }
     

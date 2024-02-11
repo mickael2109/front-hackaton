@@ -32,8 +32,7 @@ const IndexClient = () => {
                                 <p>
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                                     Porro, laborum fuga, nihil facilis vero blanditiis 
-                                    perferendis maiores repellendus quo modi quia nobis, 
-                                    delectus nostrum autem minima alias totam commodi sapiente.
+                                    perferendis maiores 
                                 </p>
                             </div>
                         </div>
@@ -44,8 +43,7 @@ const IndexClient = () => {
                                 <p>
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                                     Porro, laborum fuga, nihil facilis vero blanditiis 
-                                    perferendis maiores repellendus quo modi quia nobis, 
-                                    delectus nostrum autem minima alias totam commodi sapiente.
+                                    perferendis maiores r
                                 </p>
                             </div>
                         </div>
@@ -56,8 +54,7 @@ const IndexClient = () => {
                                 <p>
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                                     Porro, laborum fuga, nihil facilis vero blanditiis 
-                                    perferendis maiores repellendus quo modi quia nobis, 
-                                    delectus nostrum autem minima alias totam commodi sapiente.
+                                    perferendis maiores.
                                 </p>
                             </div>
                         </div>
