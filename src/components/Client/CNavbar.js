@@ -1,44 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaChalkboardTeacher } from 'react-icons/fa';
+import { FaHome } from 'react-icons/fa';
 import { BiSolidTrain } from "react-icons/bi";
-import { IoSettingsSharp } from "react-icons/io5";
+import { FaMapMarkedAlt } from "react-icons/fa";
 
 const CNavbar = () => {
 
-    const [activeTab, setActiveTab] = useState('gare')
+    const [activeTab, setActiveTab] = useState('accueil')
     const location = useLocation()
     
     useEffect(() => {
         // Utils.verifyToken()
-        if(location.pathname === '/client'){
-            setActiveTab('gare')
-        }else if (location.pathname === '/admin/prof'){
-            setActiveTab('Prof')
-        }else if (location.pathname === '/admin/etudiant'){
-            setActiveTab('Etudiant')
-        }else if (location.pathname === '/admin/classe'){
-            setActiveTab('Classe')
-        }else if (location.pathname === '/admin/matiere'){
-            setActiveTab('Matiere')
+        if(location.pathname === '/'){
+            setActiveTab('accueil')
+        }else if (location.pathname === '/listebus'){
+            setActiveTab('busListe')
+        }else if (location.pathname === '/listearret'){
+            setActiveTab('listeArret')
         }
     }, [location.pathname])
 
     return (
-        <div className='sidebar-top'>
-            <div className='sidebar-element'>
-                <div className='image-user'>
-                    <div className=''><img src='../../media/user.png' alt='profile'/></div>
-                </div>
-                <div className='icon-sidebar'>
-                    <Link to='/client'>
-                        <div className={`${activeTab === "gare" ? "icon-link" : "active-link"}`} ><i><BiSolidTrain /></i></div>
+        <div className='navbar-top'>
+            <div className='navbar-element'>
+                <div className='icon-navbar'>
+                    <Link to='/'>
+                        <div className={`${activeTab === "accueil" ? "icon-link" : "active-link"}`} ><i><FaHome /></i></div>
                     </Link>
-                    <Link to=''>
-                        <div className={`${activeTab === "reservation" ? "icon-link" : "active-link"}`}><i><FaChalkboardTeacher /></i></div>
+                    <Link to='/listebus'>
+                        <div className={`${activeTab === "busListe" ? "icon-link" : "active-link"}`}><i><BiSolidTrain  /></i></div>
                     </Link>
-                    <Link to=''>
-                        <div className={`${activeTab === "parametre" ? "icon-link" : "active-link"}`}><i><IoSettingsSharp  /></i></div>
+                    <Link to='/listearret'>
+                        <div className={`${activeTab === "listeArret" ? "icon-link" : "active-link"}`}><i><FaMapMarkedAlt  /></i></div>
                     </Link>
                 </div>
             </div>

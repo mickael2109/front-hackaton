@@ -21,6 +21,7 @@ code {
   --text-color-bleu: #0075B7;
   --bleu-login : #007DFE;
   --text-black : #2B2B2B;
+  --color-jaune : #FFC60B;
 
   /*----------- BACKGROUND -----------*/
   --background-color-blue: #0B1039;
@@ -51,4 +52,27 @@ code {
   background: var(--scroll-color);
   border-radius: 2em;
   filter: blur(5px);
+}
+
+
+/*======= BOUTON STYLE =======*/
+.btn{
+  border: 0;
+  padding: 10px 20px 10px 20px;
+  border-radius: 8px;
+  color: var(--text-color);
+  margin: 5px;
+  cursor: pointer;
+}
+  .btn-valider{
+      background-color: var(--background-color-green);
+  }
+  .btn-annuler{
+      background-color: var(--background-color-red);
+  }
+  .btn-reserver{
+      background-color: var(--background-color-1);
+  }
+  .btn-commencer{
+    background-color: var(--color-jaune);
 }
