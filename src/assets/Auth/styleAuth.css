@@ -1,0 +1,103 @@
+/* -------------------------------------------------------------------------- */
+/* AUTHENTIFICATION */
+.authentification{
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+    .authentification  .logo-auth{
+        width: 800px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+        .logo-auth img{
+            width: 80%;
+            height: 80%;
+        }
+
+    /**/
+    .authentification .input-auth{
+      width: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+        .input-auth h2{
+            color: var(--bleu-login);
+            font-size: 30px;
+            font-weight: 600;
+        }
+
+        .input-auth .control{
+            margin: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border: 2px solid #38384d52;
+            padding: 5px;
+            border-radius: 10px;
+        }
+            .input-auth .control i{
+                margin-left: 10px;
+            }
+            .input-auth .control input{
+                width: 350px;
+                border: 0;
+                background-color: #fff;
+                margin-left: 5px;
+            }
+            .input-auth .control input::selection{
+                border: 0;
+                background-color: #fff;
+            }
+
+        .input-auth .btn-auth{
+            background-color: var(--bleu-login);
+            padding: 10px;
+            border-radius: 10px;
+            border: 0;
+            width: 400px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .input-auth .create-compte{
+            margin-top: 20px;
+            font-size: 12px;
+        }
+            .create-compte a{
+                text-decoration: none;
+            }
+       
+/* CREATE COMPTE */
+.profile-user{
+    height: 100px;
+    width: 100px;
+}
+    .profile-user input{
+        border: 0;
+        opacity: 0;
+    }
+    .profile-user .file-cta{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: transparent;
+    }
+        .profile-user label img{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: contain;
+        }
+
+    .profile-user .icon-modifier{
+        position: absolute;
+        margin: -50px 0 0 90px;
+    }

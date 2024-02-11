@@ -33,6 +33,9 @@ const CNavbar = () => {
                     <Link to='/listearret'>
                         <div className={`${activeTab === "listeArret" ? "icon-link" : "active-link"}`}><i><FaMapMarkedAlt  /></i></div>
                     </Link>
+                    <Link to='/login' target="_blank">
+                        <div className="active-link">Login</div>
+                    </Link>
                 </div>
             </div>
         </div>

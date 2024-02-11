@@ -9,15 +9,7 @@ const BusLayout = () => {
                 <BUNavbar/>
             </div>
             <div className='main-content'>
-                <div className='top-navbar'>
-                    {/* Contenu de la barre de navigation en haut */}
-                </div>
-                <div className='content-container'>
-                    {/* Contenu principal */}
-                    <div className='content'>
-                        <Outlet />
-                    </div>
-                </div>
+                <Outlet />
             </div>
         </div>
     );
