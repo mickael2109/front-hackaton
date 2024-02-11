@@ -18,7 +18,7 @@ export const ListBus = () => {
         }
     }
     
-    const deleteBus = async(_id) => {
+    const deleteBus = async(id) => {
         //     try {
         //         const reponse = await axios.delete(`http://localhost:5000/clients/${id}`)
         //         if(reponse.data.messageSucces){
@@ -67,6 +67,7 @@ export const ListBus = () => {
                             <th>Matricule</th>
                             <th>Voir</th>
                             <th>Modifier</th>
+                            <th>Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,6 +78,7 @@ export const ListBus = () => {
                             <td>{bus.matricule}</td>
                             <td><Link to={`/admin/bus/profileBus/${bus.id}`}></Link></td>
                             <td><Link to={`/admin/bus/updateBus/${bus.id}`}></Link></td>
+                            <td><i onClick={() => actionButton(bus.id)}><FaTrash/></i></td>
                         </tr>
                         ))}
                     </tbody>
@@ -97,12 +99,12 @@ export const ListBus = () => {
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/bus/createBus',
-                {
-                    "nom": bus.nom,
-                    "matricule": bus.matricule,
-                    "idStatu": 1,
-                    "typeBusId": 1
-                }, {
+            {
+                "nom": bus.nom,
+                "matricule": bus.matricule,
+                "idStatu": 1,
+                "typeBusId": 1
+            }, {
                 headers: { "Content-Type": "multipart/form-data" }
             }).then(res => {
                 Utils.sucess("Votre compte est bien enregistré !");
