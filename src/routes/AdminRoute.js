@@ -4,9 +4,9 @@ import { Utils } from '../_utils/Utils';
 import AdminLayout from '../views/Admin/AdminLayout'
 import Dashboard from '../views/Admin/Dashboard';
 import Bus from '../views/Admin/Bus';
-import {ListBus, AddEditBus, updateBus} from '../components/Admin/ListBus';
+import {ListBus, AddBus} from '../components/Admin/ListBus';
 import Controller from '../views/Admin/Controller';
-import ListController from '../components/Admin/ListController';
+// import ListController from '../components/Admin/ListController';
 
 const AdminRoute = () => {
     return (
@@ -16,11 +16,11 @@ const AdminRoute = () => {
 
                 <Route path='/bus' element={<Bus/>}>
                     <Route index element={<ListBus/>}/>
-                    <Route path='/bus/addEditBus' element={<AddEditBus/>}/>
-                    <Route path='/bus/updateBus' element={<updadeBus/>}/>
+                    <Route path='/bus/addEditBus' element={<AddBus/>}/>
+                    {/* <Route path='/bus/updateBus' element={<updadeBus/>}/> */}
                 </Route>
                 <Route path='/controller' element={<Controller/>}>
-                    <Route index element={<ListController/>}/>
+                    {/* <Route index element={<ListController/>}/> */}
                     
                 </Route>
             </Route>

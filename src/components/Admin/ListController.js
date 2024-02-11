@@ -3,6 +3,8 @@ import { FaTrash,FaPen } from "react-icons/fa";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const ListController = () => {
     const[dataController,setDataController]=useState([])
@@ -100,20 +102,11 @@ export const ListController = () => {
 export const AddEditController = () => {
     const {id} = useParams()
     const [controller, setController] = useState({
-        nom: '',  adresse: '', preview:''
+        nom: '',  adresse: ''
     })
-    const [profile, setProfile] = useState('')
     const navigate = useNavigate()
-
-    const loadProfile = (e) =>{
-        const image = e.target.files[0]
-        if(image){
-            setProfile(image)
-            setProf({...prof, preview: URL.createObjectURL(image)})
-        }
-    }
     
-    const addProf = async(data) => {
+    const addController = async(data) => {
         // try {
         //     const rep =  await axios.post("http://localhost:5000/clients", data)
         //     if(rep.data.messageSucces){
@@ -127,7 +120,7 @@ export const AddEditController = () => {
         // }
     }
 
-    const updateProf = async(data, id) => {
+    const updateController = async(data, id) => {
         // try {
         //     const rep = await axios.patch(`http://localhost:5000/clients/${id}`, data)
         //     if(rep.data.messageSucces){
@@ -145,12 +138,9 @@ export const AddEditController = () => {
     const actionButton = async(e) => {
         e.preventDefault()
         
-        if(!prof.nom || !prof.adresse ){
+        if(!controller.nom || !controller.adresse ){
             Swal.fire({ icon: 'error', title: 'Erreur', text: 'Veuillez complèter les champs!', });
         }else{
-            if(!profile){
-                Swal.fire({ icon: 'error', title: 'Erreur', text: 'Veuillez insérer une image!', });
-            }else{
                 Swal.fire({
                     title: `Voulez-vous vraiment ${id ? "modifier": "ajouter"} ce nouveau client?`,
                     showDenyButton: true,
@@ -162,20 +152,18 @@ export const AddEditController = () => {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             const formData = new FormData()
-                            formData.append('nom', prof.nom)
-                            formData.append('adresse', prof.adresse)
-                            formData.append('profile', profile)
+                            formData.append('nom', controller.nom)
+                            formData.append('adresse', controller.adresse)
                     
                             if(!id){
-                                addProf(formData)
+                                addController(formData)
                             }else{
-                                updateProf(formData, id)
+                                updateController(formData, id)
                             }
                            
                             navigate("/admin/client")
                         }
-                    }); 
-            }
+                    });
         }
 
     }
@@ -187,47 +175,17 @@ export const AddEditController = () => {
                     <div className="field">
                         <label className='label'>Nom</label>
                         <div className="control">
-                            <input type='text' value={prof.nom} onChange={(e) => setProf({...prof, nom: e.target.value})} className='input' placeholder='Nom du Client'/>
+                            <input type='text' value={controller.nom} onChange={(e) => setController({...controller, nom: e.target.value})} className='input' placeholder='Nom du Client'/>
                         </div>
                     </div>
                 
                     <div className="field">
                         <label className='label'>Adresse</label>
                         <div className="control">
-                            <input type='text' value={prof.adresse} onChange={(e) => setProf({...prof, adresse: e.target.value})} className='input' placeholder='Adresse du Client'/>
+                            <input type='text' value={controller.adresse} onChange={(e) => setController({...controller, adresse: e.target.value})} className='input' placeholder='Adresse du Client'/>
                         </div>
                     </div>
-                    <div className="field">
-                        <label className='label'>Profile</label>
-                        <div className="control">
-                            <div className="file">
-                                <label className='file-label'>
-                                    <input type='file' className='file-input' onChange={loadProfile}/>
-                                    <span className='file-cta'>
-                                        <span className='file-label'>Choisir une image ...</span>
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                   
-                    {
-                        prof.preview ? (
-                            <figure className='image is-128x128'>
-                                <img src={prof.preview} alt='Preview images' />
-                            </figure>
-                        ):(
-                            ""
-                        )
-                    }
-                    <div className="field btn">
-                        <div className="control">
-                            <input type='submit' value={id ? "Modifier": "Ajouter"} className='button is-success'/>
-                        </div>
-                        <div className="control">
-                            <button type='reset' className='button is-danger'>Annuler</button>
-                        </div>
-                    </div>
+                    
                 </div>
             </form>
         </div>
