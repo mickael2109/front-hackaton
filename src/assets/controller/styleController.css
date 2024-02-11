@@ -1,3 +1,9 @@
+.modalcheck .modal-contents{
+  width: 400px;
+}
+
+/*  */
+
 .card-item-bus{
   background-color: #0074b786;
   border-radius: 10px;
@@ -71,15 +77,17 @@
     padding: 10px;
   }
     .titre-check span{
-      font-size: 25px;
+      font-size: 35px;
       text-transform: uppercase;
       font-weight: 600;
+      color: #035c8f;
     }
 .check .liste-arret{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center ;
+  height: 90vh;
 }
   .liste-arret .image-bus{
     width: 300px;
@@ -92,6 +100,7 @@
     .image-bus img{
       width: 300px;
       height: 300px;
+      border-radius: 25px;
       object-fit: contain;
     }
 
@@ -104,7 +113,7 @@
   width: 70%;
   overflow: hidden;
   overflow-y: scroll;
-  height: 55vh;
+  height: 80vh;
 }
   .list-arret-bus a{
       width: 300px;

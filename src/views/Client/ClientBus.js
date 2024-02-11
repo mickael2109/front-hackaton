@@ -8,6 +8,7 @@ import "leaflet-control-geocoder/dist/Control.Geocoder.css"
 import "leaflet-control-geocoder/dist/Control.Geocoder.js"
 import L from "leaflet"
 import MapBus from '../../components/Client/MapBus';
+import axios from 'axios';
 
 const ClientBus = () => {
 
@@ -26,7 +27,7 @@ const ClientBus = () => {
     const getAllBus = async () => {
         try {
             setLoading(true);
-            busService.getBusAll()
+            await axios.get('http://localhost:5000/bus/getAllBus')
                 .then((res) => {
                     setBus(res.data.bus);
                 })
@@ -47,7 +48,7 @@ const ClientBus = () => {
 
     // Déplacer filteredLocations après la définition de searchTerm
     const filteredGare = bus.filter((busItem) => {
-        return busItem.typeBus.nom.toLowerCase().includes(searchTerm.toLowerCase());
+        return busItem.nom.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
     return (
@@ -91,7 +92,7 @@ const ClientBus = () => {
                                                         <img src={process.env.PUBLIC_URL + `./media/bus/114.png`} alt='15' />
                                                     </div>
                                                     <div className="card-body">
-                                                        <span>{busItem.typeBus.nom}</span>
+                                                        <span>{busItem.nom}</span>
                                                     </div>
                                                 </div>
                                             </Link>

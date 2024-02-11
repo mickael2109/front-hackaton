@@ -8,11 +8,11 @@ const Bus = () => {
     const [dataArret, setDataArret] = useState([]);
     const [loading, setLoading] = useState(true);
     const tokens = localStorage.getItem('token');
-    const [idArret, setIdArret] = useState('');
-    const [typeBusId, setTypeBusId] = useState('');
+    const [idArret, setIdArret] = useState(0);
+    const [typeBusId, setTypeBusId] = useState(0);
     const options = [1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27];
 
-    const removePersonne = async () => {
+    const removePersonne = async (arret, typeBus) => {
         const { value: selectedNumber } = await Swal.fire({
             title: 'Nombre des nouveaux passagers:',
             input: 'select',
@@ -25,24 +25,18 @@ const Bus = () => {
         });
 
         if (selectedNumber) {
+            console.log("arretId : ",arret)
+            console.log("typeBusId : ",typeBus)
+            console.log("nb : ",selectedNumber)
             try {
                 await axios.post('http://localhost:5000/arret/removePersonne', 
                 {
-                    "arretId": idArret,
-                    "typeBusId": typeBusId,
+                    "arretId": arret,
+                    "typeBusId": typeBus,
                     "nb": selectedNumber
                 }).then(res=>{
                       Utils.sucess(`Voyageur ${selectedNumber} bien checké`) 
-                      window.location.href='/bus'
-                    //   const token = res.data.access_token;
-                    //   localStorage.setItem('token', token);  
-                    //   if(res.data.role === 1){
-                    //     
-                    //   }else if(res.data.role === 2){
-                    //     window.location.href='/controller'
-                    //   }else if(res.data.role === 3){
-                    //     window.location.href='/bus'
-                    //   }        
+                    //   window.location.href='/bus'
                 })
                 .catch((error) => {
                   Utils.errorPage(error.response.data.message)
@@ -81,7 +75,7 @@ const Bus = () => {
 
     return (
         <div className='check'>
-            <div className='titre-check'><span>accueil</span></div>
+            <div className='titre-check'><span>RECEVEUR</span></div>
             <div className='liste-arret'>
                 <div className='image-bus'>
                     <img src={process.env.PUBLIC_URL + `./media/bus/109.png`} alt='logo-images' />
@@ -100,9 +94,7 @@ const Bus = () => {
                                 {
                                     dataArret.map((arretItem, index) => (
                                         <Link to='' key={index} onClick={() => {
-                                            setIdArret(arretItem.id);
-                                            setTypeBusId(arretItem.typeBusId);
-                                            removePersonne();
+                                            removePersonne(arretItem.id, arretItem.typeBusId);
                                         }}>
                                             <div className="card-item">
                                                 <div className="card-image">

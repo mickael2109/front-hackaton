@@ -3,28 +3,41 @@ import axios from 'axios';
 import { Utils } from '../../_utils/Utils';
 import { Link } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
+import 'sweetalert2/dist/sweetalert2.css';
+import Swal from 'sweetalert2';
 
 const Check = () => {
-    const check = async (e) => {
-        e.preventDefault();
-        try {
-            await axios.post('http://localhost:5000/arret/addPersonne',
-            {
-                "arretId": 1,
-                "typeBusId": 1
-            }, {
-                headers: { "Content-Type": "multipart/form-data" }
-            }).then(res => {
-                Utils.sucess("Votre compte est bien enregistré !");
-                window.location.href = '/controller';
-            })
-                .catch((error) => {
-                    Utils.errorPage(error.response.data.message);
-                });
-        } catch (error) {
-            Utils.errorPage('Une erreur s\'est produite lors de la connexion. Veuillez réessayer.');
-        }
-    };
+
+    const [showModal, setShowModal] = useState(false);
+
+    const openModal = () => {
+        setShowModal(true);
+      };
+    
+      const closeModal = () => {
+        setShowModal(false);
+      };
+  
+    // const check = async (e) => {
+    //     e.preventDefault();
+    //     try {
+    //         await axios.post('http://localhost:5000/arret/addPersonne',
+    //         {
+    //             "arretId": 1,
+    //             "typeBusId": 1
+    //         }, {
+    //             headers: { "Content-Type": "multipart/form-data" }
+    //         }).then(res => {
+    //             Utils.sucess("Votre compte est bien enregistré !");
+    //             window.location.href = '/controller';
+    //         })
+    //             .catch((error) => {
+    //                 Utils.errorPage(error.response.data.message);
+    //             });
+    //     } catch (error) {
+    //         Utils.errorPage('Une erreur s\'est produite lors de la connexion. Veuillez réessayer.');
+    //     }
+    // };
 
     const [dataBus, setDataBus] = useState([]);
     const [dataArret, setDataArret] = useState([])
@@ -65,6 +78,7 @@ const Check = () => {
     useEffect(() => {
         getAllBus();
         getArretByToken()
+    
     }, [tokens, idArret, typeBusId]);
 
     return (
@@ -86,10 +100,9 @@ const Check = () => {
                                 {
                                     dataBus.map((busItem, index) => (
                                         <Link to='' key={index} onClick={() => {
-                                            setIdArret(busItem.id);
-                                            setTypeBusId(busItem.nom);
-                                            // removePersonne();
-                                        }}>
+                                                openModal()
+                                                // removePersonne();
+                                            }}>
                                             <div className="card-item-bus">
                                                 <div className="card-image-bus">
                                                     <img src={process.env.PUBLIC_URL + `./media/bus/109.png`} alt='Ampefiloha' />
@@ -100,6 +113,7 @@ const Check = () => {
                                                     </div>
                                                 </div>
                                             </div>
+                                            <ModalCheck showModal={showModal} closeModal={closeModal} arretId={dataArret.arretId} typeBusId={busItem.id}/>
                                         </Link>
                                     ))
                                 }
@@ -112,34 +126,61 @@ const Check = () => {
     );
 };
 
-const ModalBus = ({ showModal, closeModal, idB }) => {
+const ModalCheck = ({ showModal, closeModal, arretId, typeBusId }) => {
+
+    console.log("arretId : ",arretId)
+    console.log("typeBusId : ",typeBusId)
+    const handleSubmit = async () => {
+        try {
+          await axios.post('http://localhost:5000/arret/addPersonne', 
+          {
+            "arretId": 1,
+            "typeBusId": 1
+          }).then(res=>{
+                Utils.sucess("Checkout ok!") 
+                // window.location.href='/controller'
+          })
+          .catch((error) => {
+            Utils.errorPage(error.response.data.message)
+          })
+        } catch (error) {
+          console.error('Erreur de connexion:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Erreur de connexion',
+            text: 'Une erreur s\'est produite lors de la connexion. Veuillez réessayer.',
+          });
+        }
+      };
 
     useEffect(() => {
-       
-    }, [idB, showModal]); // Ajout de showModal comme dépendance
+
+    }, [showModal, typeBusId, arretId]); // Ajout de showModal comme dépendance
 
     return(
-        <div className=''>
+        <div className='modalcheck'>
             {showModal && (
-                <div className="modal-overlay" >
-                    <div className="modal-contents" onClick={(e) => e.stopPropagation()}>
-                        <div className="">
-                            <div className="modal-header">
-                                <h5 className="modal-title" id="staticBackdropLabel">CHECKOUT</h5>
-                                <i onClick={closeModal} style={{ cursor: 'pointer', color: 'red' }}><FaTimes /></i>
-                            </div>
-                            <div className="modal-body">
-                                <div className='content-bus'>
-                                    <div className='image-bus'>
-                                        <img src={process.env.PUBLIC_URL + `./media/bus/15.png`} alt='15' />
-                                    </div>
-                                   
+                <form onSubmit= {handleSubmit}>
+                    <div className="modal-overlay" >
+                        <div className="modal-contents" onClick={(e) => e.stopPropagation()}>
+                            <div className="">
+                                <div className="modal-headers">
+                                    <h5 className="modal-title" id="staticBackdropLabel">CHECKOUT</h5>
+                                    <i onClick={closeModal} style={{ cursor: 'pointer', color: 'red' }}><FaTimes /></i>
                                 </div>
-                                
+                                <div className="modal-body">
+                                    <div className='content-bus'>
+                                        <div className='image-bus'>
+                                            <img src={process.env.PUBLIC_URL + `./media/pointer.jpg`} alt='15' />
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <button type='submit'>Valider</button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             )}
         </div>  
     )
