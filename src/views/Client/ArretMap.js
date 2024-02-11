@@ -1,32 +1,41 @@
-// LeafletRoutingMachine.js
 import { useEffect } from 'react';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import { useMap } from 'react-leaflet';
 
-const ArretMap = (props) => {
+const ArretMap = ({ dataBus, valide }) => {
     const map = useMap();
-    const { latitudeDepart, longitudeDepart } = props;
 
-  useEffect(() => {
-    // Efface tous les marqueurs de la carte
-    map.eachLayer(layer => {
-      if (layer instanceof L.Marker) {
-        map.removeLayer(layer);
-      }
-    });
+    useEffect(() => {
+        if (!valide) {
+            // Effacer tous les marqueurs et les routes de la carte
+            map.eachLayer(layer => {
+                if (layer instanceof L.Marker || layer instanceof L.Routing.Control) {
+                    map.removeLayer(layer);
+                }
+            });
+        } else {
+            // Ajouter les marqueurs et les routes uniquement si valide est true
+            if (dataBus.length > 0) {
+                dataBus.forEach(location => {
+                    const marker = L.marker([location.lat, location.long]).addTo(map);
+                    marker.bindPopup(location.nomArret + ' (' + location.nbpa + ')');
+                });
 
-    // Ajoute les nouveaux marqueurs pour les emplacements filtrés
-    // if (filteredLocations.length > 0) {
-    //   filteredLocations.forEach(location => {
-    //     const marker = L.marker([location.latitude, location.longitude]).addTo(map);
-    //     marker.bindPopup(location.gare); // Affiche le nom du lieu dans la popup
-    //   });
-    // }
-    const marker = L.marker([-18.9190918416808, 47.5241625308991]).addTo(map);
-    marker.bindPopup(); // Affiche le nom du lieu dans la popup
-  }, [map]); // Déclenche l'effet à chaque changement de filteredLocations ou map
+                const startPoint = [dataBus[0].lat, dataBus[0].long];
+                const endPoint = [dataBus[dataBus.length - 1].lat, dataBus[dataBus.length - 1].long];
+
+                const control = L.Routing.control({
+                    waypoints: [
+                        L.latLng(startPoint[0], startPoint[1]),
+                        L.latLng(endPoint[0], endPoint[1])
+                    ],
+                    show: false
+                }).addTo(map);
+            }
+        }
+    }, [dataBus, map, valide]);
 
     return null;
 };

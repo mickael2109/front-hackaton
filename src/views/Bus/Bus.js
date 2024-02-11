@@ -4,7 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Utils } from '../../_utils/Utils';
 
-const Check = () => {
+const Bus = () => {
     const [dataArret, setDataArret] = useState([]);
     const [loading, setLoading] = useState(true);
     const tokens = localStorage.getItem('token');
@@ -126,4 +126,4 @@ const Check = () => {
     );
 };
 
-export default Check;
+export default Bus;

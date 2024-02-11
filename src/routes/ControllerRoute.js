@@ -12,6 +12,7 @@ const ControllerRoute = () => {
             </Route>
             <Route path='*' element={<Utils.PageNotFound/>}/>
         </Routes>
+
     );
 };
 

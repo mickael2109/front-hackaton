@@ -10,8 +10,14 @@ let getBusId = (id) => {
     return Axios.get(`/arret/getTrajet/${id}`)
 }
 
+let getArretAll = () => {
+    return Axios.get(`/arret/getAllArret`)
+}
 
+let getAllBus = () => {
+    return Axios.get(`/bus/getAllBus`)
+}
 
 export const busService = {
-    getBusAll, getBusId
+    getBusAll, getBusId, getArretAll, getAllBus
 }

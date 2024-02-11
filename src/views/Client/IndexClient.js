@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { MdMeetingRoom } from "react-icons/md";
 import { PiStudentFill } from "react-icons/pi";
 import { FaTachometerAlt } from 'react-icons/fa';
