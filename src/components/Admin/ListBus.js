@@ -1,144 +1,244 @@
 import React, { useEffect, useState } from "react";
 import { FaTrash,FaPen } from "react-icons/fa";
-import 'bootstrap/dist/css/bootstrap.min.css'
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { FaEdit, FaLock, FaPhoneAlt } from 'react-icons/fa';
 import axios from 'axios'
+import { Navigate } from "react-router-dom";
 
-const ListBus = () => {
+export const ListBus = () => {
     const [dataBus, setDataBus] = useState([]);
-    const [show, setShow] = useState(false);
-    const [selectedBus, setSelectedBus] = useState(null);
-
-    const handleClose = () => {
-        setShow(false);
-        setSelectedBus(null);
-    };
-
-    const handleShow = (bus) => {
-        setSelectedBus(bus);
-        setShow(true);
-    };
     const getAllBus= async()=>{
         const response = await axios.get("http://localhost:5000/bus/")
         if(response.status === 200){
-        
             setDataBus(response.data.bus) 
             console.log(response.data)
            
                    
         }
     }
+    
+    const deleteBus = async(id) => {
+        //     try {
+        //         const reponse = await axios.delete(`http://localhost:5000/clients/${id}`)
+        //         if(reponse.data.messageSucces){
+        //             Swal.fire({ icon: 'success', title: 'Message succès', text: reponse.data.messageSucces, });
+        //             getAllProf()  
+        //         }else if(reponse.data.messageError){
+        //             Swal.fire({ icon: 'error', title: 'Erreur!', text: reponse.data.messageError, });
+        //         }
+        //    } catch (error) {
+        //         Swal.fire({ icon: 'error', title: 'Erreur de connexion', text: 'Une erreur s\'est produite lors de la connexion. Veuillez réessayer.', });
+        //    }
+    }
+   
+    const actionButton = async(id) => {
 
-    const handleSave = async () => {
-        if (selectedBus) {
-            // Logique pour la modification (envoyer une requête PUT à votre API)
-            // Mettez à jour votre base de données avec les nouvelles valeurs.
-            // const response = await axios.put(`http://localhost:8000/bus/${selectedBus.id}`, { nom: selectedBus.nom, matricule: selectedBus.matricule });
-            // Mettez à jour state ou effectuez d'autres actions nécessaires après la modification.
-        } else {
-            // Logique pour l'ajout (envoyer une requête POST à votre API)
-            // const response = await axios.post("http://localhost:8000/bus/", { nom: nomDuNouveauBus, matricule: matriculeDuNouveauBus });
-            // Ajoutez le nouveau bus à votre base de données.
-        }
-        handleClose();
-        // Rafraîchissez la liste des bus après l'ajout ou la modification.
-        getAllBus();
-    };
+        Swal.fire({
+            title: `Êtes-vous sure de vouloir supprimer cette prof?`,
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText:  `Supprimer`,
+            denyButtonText: "Annuler",
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteBus(id)
+                }
+            });           
+    }
 
-    const handleDelete = async () => {
-        if (selectedBus) {
-            // Logique pour la suppression (envoyer une requête DELETE à votre API)
-            // const response = await axios.delete(`http://localhost:8000/bus/${selectedBus.id}`);
-            // Supprimez le bus de votre base de données.
-            // Mettez à jour state ou effectuez d'autres actions nécessaires après la suppression.
-            handleClose();
-            // Rafraîchissez la liste des bus après la suppression.
-            getAllBus();
-        }
-    };
     useEffect(() => {
         getAllBus()
     }, [])
+    
 
     return (
-        <>
-            <div className="navbarPage">
-                <div className='titre-page'><h3>Bus</h3></div>
-                <div><button className='button is-success' variant="primary" onClick={handleShow} >Nouveau bus</button></div>
-            </div>
+        <div className='all-client'>
+
+
             {Array.isArray(dataBus) && dataBus.length > 0 ? (
                 <table className='styled-table'>
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Nom</th>
                             <th>Matricule</th>
+                            <th>Voir</th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {/* <tr>
-                            <td>bus 1</td>
-                            <td>matricule 1</td>
-                            <td><button className="btn btn-success" variant="primary" onClick={() => handleShow(bus)} ><FaPen/></button></td>
-                            <td><button className="btn btn-danger" onClick={() => handleDelete(bus.id)}><FaTrash/></button></td>
-                        </tr> */}
-                        { dataBus.map((bus) => (
+                        {  dataProf.map((bus) => (
                             <tr key={bus.id}>
-                                <td>{bus.nom}</td>
-                                <td>{bus.matricule}</td>
-                                <td><button className="btn btn-success" variant="primary" onClick={() => handleShow(bus)} ><FaPen/></button></td>
-                            <td><button className="btn btn-danger" onClick={() => handleDelete(bus.id)}><FaTrash/></button></td>
+                            <td>{bus.id}</td>
+                            <td>{bus.nom}</td>
+                            <td>{bus.matricule}</td>
+                            <td><Link to={`/admin/bus/profileBus/${bus.id}`}><i><FaEye/></i></Link></td>
+                            <td><Link to={`/admin/bus/updateBus/${bus.id}`} ><i><FaEdit/></i></Link></td>
+                            <td><i onClick={() => actionButton(bus.id)}><FaTrash/></i></td>
                         </tr>
                         ))}
                     </tbody>
                 </table>
-             ) : (
-                <div>Aucun bus disponible.</div>
-            )} 
-
-            <Modal
-                key={Math.random()} 
-                show={show}
-                onHide={handleClose} 
-                backdrop="static" 
-                keyboard={false} 
-                size="xl"
-                dialogClassName="custom-modal-dialog"
-                fade={false}
-            >
-                <Modal.Header closeButton>
-                    {/* <Modal.Title>FORMULAIRE POUR LE BUS</Modal.Title> */}
-                </Modal.Header>
-                <Modal.Body>
-                <h5 className="text-center  p-3 mb-2" style={{fontSize:"27px"}} > FORMULAIRE POUR LE BUS: </h5>
-                <div className="mt-5 p-4">
-                <div className="field">
-                    <label className="label">Nom du bus</label>
-                    <div className="control">
-                        <input class="input" type="text" placeholder="Nom"/>
-                    </div>
-                </div> 
-                <div className="field">
-                    <label className="label">Matricule du bus</label>
-                    <div className="control">
-                        <input class="input" type="text" placeholder="Matricule"/>
-                    </div>
-                </div> 
-                </div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary">Valider</Button>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Fermer
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-
-
-        </>
+            ) : (
+                <div>Aucun Prof disponible.</div>
+            )}
+           
+        </div>
     );
-}
+};
 
-export default ListBus;
+export const addEditBus = () => {
+
+    const {id} = useParams()
+    const [bus, setBus] = useState({
+        nom: '',  matricule: ''
+    })
+
+    
+    const addBus = async () => {
+        try {
+            await axios.put('http://localhost:5000/bus/createBus', 
+            {
+                "nom": bus.nom,
+                "email": bus.matricule,
+                "idStatu": 1,
+                "typeBusId": 1
+            },{
+                headers: {"Content-Type": "multipart/form-data"}
+            }).then(res=>{
+                    Utils.sucess("Votre compte est bien enregistrée!")
+            })
+            .catch((error) => {
+                Utils.errorPage(error.response.data.message)
+            })
+            } catch (error) {
+                Utils.errorPage('Une erreur s\'est produite lors de la connexion. Veuillez réessayer.')
+        }
+    }
+
+
+    const actionButton = async(e) => {
+        e.preventDefault()
+        Swal.fire({
+            title: `Voulez-vous vraiment ${id ? "modifier": "ajouter"} ce nouveau bus?`,
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText:  `${id ? "Modifier": "Ajouter"}`,
+            denyButtonText: "Annuler",
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+        
+                    addBus()
+                    Navigate("/admin/bus")
+                }
+            }); 
+    }
+
+        
+    return (
+        <div className='authentification'>
+            <form onSubmit={actionButton}>
+                <div className='input-auth'>
+                    <div className="control">
+                        <i><MdDriveFileRenameOutline /></i>
+                        <input type="text" value={bus.nom} onChange={(e) => setBus({...bus, nom: e.target.value})} className='input' placeholder="Nom" />
+                    </div>
+                    <div className="control">
+                        <i><MdEmail/></i>
+                        <input type="text" value={bus.matricule} onChange={(e) => setBus({...bus, matricule: e.target.value})} className='input' placeholder="Matricule" />
+                    </div>
+
+                    <div className="field btn">
+                        <div className="control">
+                            <input type='submit' value={id ? "Modifier": "Ajouter"} className='button is-success'/>
+                        </div>
+                        <div className="control">
+                            <button type='reset' className='button is-danger'>Annuler</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    )
+};
+
+export const updateBus = () => {
+
+    const {id} = useParams()
+    const [bus, setBus] = useState({
+        nom: '',  matricule: ''
+    })
+
+    const updateBus = async(id) => {
+        e.preventDefault()
+        try {
+            const rep = await axios.patch(`http://localhost:5000/bus/updateBus`, 
+            {
+                "nom": bus.nom,
+                "email": bus.matricule,
+                "id": id
+            },{
+                headers: {"Content-Type": "multipart/form-data"}
+            }).then(res=>{
+                    Utils.sucess("Votre compte est bien enregistrée!")
+            })
+            .catch((error) => {
+                Utils.errorPage(error.response.data.message)
+            })
+        } catch (error) {
+            Utils.errorPage('Une erreur s\'est produite lors de la connexion. Veuillez réessayer.')
+        }
+
+    }
+
+    const actionButton = async(e) => {
+        e.preventDefault()
+        Swal.fire({
+            title: `Voulez-vous vraiment ${id ? "modifier": "ajouter"} ce nouveau bus?`,
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText:  `${id ? "Modifier": "Ajouter"}`,
+            denyButtonText: "Annuler",
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                        updateBus(id)
+                    
+                        Navigate("/admin/bus")
+                }
+            }); 
+    }
+
+        
+    return (
+        <div className='authentification'>
+            <form onSubmit={actionButton}>
+                <div className='input-auth'>
+                    <div className="control">
+                        <i><MdDriveFileRenameOutline /></i>
+                        <input type="text" value={bus.nom} onChange={(e) => setBus({...bus, nom: e.target.value})} className='input' placeholder="Nom" />
+                    </div>
+                    <div className="control">
+                        <i><MdEmail/></i>
+                        <input type="text" value={bus.matricule} onChange={(e) => setBus({...bus, matricule: e.target.value})} className='input' placeholder="Email" />
+                    </div>
+
+                    <div className="field btn">
+                        <div className="control">
+                            <input type='submit' value={id ? "Modifier": "Ajouter"} className='button is-success'/>
+                        </div>
+                        <div className="control">
+                            <button type='reset' className='button is-danger'>Annuler</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    )
+};
