@@ -6,14 +6,14 @@ const Check = () => {
     const createCompte = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/arret/addPersonne',
+            await axios.post('http://localhost:5000/arret/removePersonne',
                 {
                     "arretId": 1,
                     "typeBusId": 1
                 }, {
                 headers: { "Content-Type": "multipart/form-data" }
             }).then(res => {
-                Utils.success("Votre compte est bien enregistré !");
+                Utils.sucess("Votre compte est bien enregistré !");
                 window.location.href = '/';
             })
                 .catch((error) => {
