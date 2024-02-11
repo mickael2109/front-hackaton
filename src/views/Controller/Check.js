@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Utils } from '../../_utils/Utils';
 
 const Check = () => {
-    const createCompte = async (e) => {
+    const addPersonne = async (e) => {
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/arret/addPersonne',
@@ -26,7 +26,7 @@ const Check = () => {
 
     return (
         <div className='check'>
-            <form onSubmit={createCompte} className='check-form'>
+            <form onSubmit={addPersonne} className='check-form'>
                 <button className='check-button'>CHECKER</button>
             </form>
         </div>
